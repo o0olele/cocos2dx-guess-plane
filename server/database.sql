@@ -1,7 +1,7 @@
-drop database if exists db1552218;
-create database db1552218;
+drop database if exists mydb;
+create database mydb;
 
-use db1552218;
+use mydb;
 
 drop table if exists info;
 create table info (
