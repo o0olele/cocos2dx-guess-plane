@@ -24,7 +24,7 @@ int Get_Update(char* chaxun, char *id, char *changed,int model)
 	strcat(condition, id);
 	strcat(condition, "'");
 	strcat(chaxun, condition);
-	cout << "¼ìË÷Ê½" << chaxun << endl;
+	cout << "æ£€ç´¢å¼" << chaxun << endl;
 	return 1;
 }
 
@@ -36,7 +36,7 @@ int Mysql_Init(MYSQL **mysql)
 		return -1;
 	}
 
-	if (mysql_real_connect(*mysql, "localhost", "u1552218", "u1552218", "db1552218", 0, NULL, 0) == NULL)
+	if (mysql_real_connect(*mysql, "localhost", "root", "123456789", "mydb", 0, NULL, 0) == NULL)
 	{
 		cout << "mysql_real_connect failed(" << mysql_error(*mysql) << ")" << endl;
 		mysql_close(*mysql);
@@ -53,7 +53,7 @@ int Info_Insert(char* id, char* passwd, char *nwin, char* nfail)
 	MYSQL_RES *result;
 	MYSQL_ROW row;
 	char buf[2000];
-	time_t timer;//time_t¾ÍÊÇlong int ÀàÐÍ
+	time_t timer;//time_tå°±æ˜¯long int ç±»åž‹
 	struct tm *tblock;
 	timer = time(NULL);
 	tblock = localtime(&timer);
@@ -67,12 +67,12 @@ int Info_Insert(char* id, char* passwd, char *nwin, char* nfail)
 	strcat(buf, "','");
 	strcat(buf, nfail);
 	strcat(buf, "');");
-	cout << "ÐÂµÄ×¢²áÓÃ»§" << buf << endl;
+	cout << "æ–°çš„æ³¨å†Œç”¨æˆ·" << buf << endl;
 	int status;
 	status = Mysql_Init(&mysql);
 	if (status == -1)
 		return -1;
-	if (mysql_query(mysql, buf)) //Ö»ÒªÓÐ±í£¬¾ÍÒ»¶¨·µ»Ø0
+	if (mysql_query(mysql, buf)) //åªè¦æœ‰è¡¨ï¼Œå°±ä¸€å®šè¿”å›ž0
 	{
 		cout << "mysql_query>> failed(" << mysql_error(mysql) << ")" << endl;
 		return -1;
@@ -108,7 +108,7 @@ int Database_Load()
 	if (status == -1)
 		return -1;
 
-	if (mysql_query(mysql, search)) //Ö»ÒªÓÐ±í£¬¾ÍÒ»¶¨·µ»Ø0
+	if (mysql_query(mysql, search)) //åªè¦æœ‰è¡¨ï¼Œå°±ä¸€å®šè¿”å›ž0
 	{
 		cout << "mysql_query>> failed(" << mysql_error(mysql) << ")" << endl;
 		return -1;
@@ -159,11 +159,11 @@ int Info_Update(char *id, char *changed,int model)
 	
 	if (Get_Update(chaxun, id, changed,model) == -1)
 	{
-		cout << "¸üÐÂÄ¿±ê²»Ã÷È·" << endl;
+		cout << "æ›´æ–°ç›®æ ‡ä¸æ˜Žç¡®" << endl;
 		return -1;
 	}
 
-	if (mysql_query(mysql, chaxun)) //Ã»²éµ½ÃÜÂëÔò²»Îª0
+	if (mysql_query(mysql, chaxun)) //æ²¡æŸ¥åˆ°å¯†ç åˆ™ä¸ä¸º0
 	{
 		cout << "mysql_query>> failed(" << mysql_error(mysql) << ")" << endl;
 		return -1;
